@@ -1,0 +1,88 @@
+﻿<Page x:Class="BibliWPF.pgMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BibliWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgMenu">
+
+
+    <Grid>
+        <GroupBox Name="grpListeMenus" Header="Liste des différents Menus" Margin="2"  >
+            <Grid>
+                <ListView Name="lvMenus" ItemsSource="{Binding}" SelectionMode="Single" Margin="1" >
+                    <ListView.Resources>
+                        <ContextMenu x:Key="ctxOnItem">
+                            <MenuItem Header="Supprimer le Menu sélectionné" Click="SupprimerMenu"/>
+                            <MenuItem Header="Ajouter un Menu" Click="AjouterMenu"/>
+                        </ContextMenu>
+                    </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="ContextMenu" Value="{StaticResource ctxOnItem}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Ajouter un Menu" Click="AjouterMenu"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+
+                    <ListView.View>
+                        <GridView>
+                            
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Entrée" Tag="Entree" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Entree, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Repas" Tag="Repas" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Repas, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5" Width="200"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Dessert" Tag="Dessert" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Dessert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Boisson" Tag="Boisson" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Boisson, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5" Width="200"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+
+
+
+
+
+
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Page>

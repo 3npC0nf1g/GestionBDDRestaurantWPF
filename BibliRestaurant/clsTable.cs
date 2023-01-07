@@ -10,7 +10,7 @@ namespace BibliRestaurantBDD
     public class Table : INotifyPropertyChanged
     {
         public int ID { get; internal set; }
-        public int Place { get;  set; }
+        public int NombrePlace { get;  set; }
 
         /// <summary>
         /// Cardinalité de type [1:N], côté 1 : Une zone possible par table.

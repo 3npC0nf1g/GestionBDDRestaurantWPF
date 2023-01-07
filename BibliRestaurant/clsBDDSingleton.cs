@@ -9,7 +9,7 @@ namespace BibliRestaurantBDD
     {
         #region Propriétés représentant la Base de données ou la rendant accessible à l'extérieur du projet
         public static BDDSingleton Instance { get; private set; } = new BDDSingleton();
-        private BDDBibliotheque BDD { get; set; }
+        private BDDRestaurant BDD { get; set; }
         #endregion
 
         #region Propriétés
@@ -17,48 +17,48 @@ namespace BibliRestaurantBDD
         #endregion
 
         #region Tables de la BDD (sous forme de ReadOnlyObservableCollection)
-        public ReadOnlyObservableCollection<Auteur> Auteurs { get; private set; }
-        public ReadOnlyObservableCollection<clsClient> Clients { get; private set; }
-        public ReadOnlyObservableCollection<Ecrire> Ecrire { get; private set; }
-        public ReadOnlyObservableCollection<Emprunt> Emprunts { get; private set; }
-        public ReadOnlyObservableCollection<Livre> Livres { get; private set; }
-        public ReadOnlyObservableCollection<Ville> Villes { get; private set; }
+        public ReadOnlyObservableCollection<Menu_> Menus { get; private set; }
+        public ReadOnlyObservableCollection<Client> Clients { get; private set; }
+        public ReadOnlyObservableCollection<Reservation> Reservations { get; private set; }
+        public ReadOnlyObservableCollection<SouhaiteAvoir> SouhaiteAvoir { get; private set; }
+        public ReadOnlyObservableCollection<Table> Tables { get; private set; }
+        public ReadOnlyObservableCollection<Zone> Zones { get; private set; }
         #endregion
 
         #region Constructeur de la classe
         public BDDSingleton()
         {
-            BDD = new BDDBibliotheque();
+            BDD = new BDDRestaurant();
             BDD.Database.EnsureCreated();
-            BDD.Auteurs.Load();
-            Auteurs = new ReadOnlyObservableCollection<Auteur>(BDD?.Auteurs.Local.ToObservableCollection());
+            BDD.Menus.Load();
+            Menus = new ReadOnlyObservableCollection<Menu_>(BDD?.Menus.Local.ToObservableCollection());
             BDD.Clients.Load();
-            Clients = new ReadOnlyObservableCollection<clsClient>(BDD?.Clients.Local.ToObservableCollection());
-            BDD.Ecrire.Load();
-            Ecrire = new ReadOnlyObservableCollection<Ecrire>(BDD?.Ecrire.Local.ToObservableCollection());
-            BDD.Emprunts.Load();
-            Emprunts = new ReadOnlyObservableCollection<Emprunt>(BDD?.Emprunts.Local.ToObservableCollection());
-            BDD.Livres.Load();
-            Livres = new ReadOnlyObservableCollection<Livre>(BDD?.Livres.Local.ToObservableCollection());
-            BDD.Villes.Load();
-            Villes = new ReadOnlyObservableCollection<Ville>(BDD?.Villes.Local.ToObservableCollection());
+            Clients = new ReadOnlyObservableCollection<Client>(BDD?.Clients.Local.ToObservableCollection());
+            BDD.Reservations.Load();
+            Reservations = new ReadOnlyObservableCollection<Reservation>(BDD?.Reservations.Local.ToObservableCollection());
+            BDD.SouhaiteAvoir.Load();
+            SouhaiteAvoir = new ReadOnlyObservableCollection<SouhaiteAvoir>(BDD?.SouhaiteAvoir.Local.ToObservableCollection());
+            BDD.Tables.Load();
+            Tables = new ReadOnlyObservableCollection<Table>(BDD?.Tables.Local.ToObservableCollection());
+            BDD.Zones.Load();
+            Zones = new ReadOnlyObservableCollection<Zone>(BDD?.Zones.Local.ToObservableCollection());
         }
         #endregion
 
         #region Méthodes permettant d'ajouter/d'enlever des données dans les tables de la BDD
-        public Auteur AjouterAuteur(string nom, string prenom) { return BDD?.AjouterAuteur(nom, prenom); }
-        public clsClient AjouterClient(string nom, string prenom, Ville ville, string rueNumero) { return BDD?.AjouterClient(nom, prenom, ville, rueNumero); }
-        public Ecrire AjouterEcrire(Auteur auteur, Livre livre) { return BDD?.AjouterEcrire(auteur, livre); }
-        public Emprunt AjouterEmprunt(DateTime dateEmprunt, clsClient client, Livre livre) { return BDD?.AjouterEmprunt(dateEmprunt, client, livre); }
-        public Livre AjouterLivre(string titre, DateTime dateAchat) { return BDD?.AjouterLivre(titre, dateAchat); }
-        public Ville AjouterVille(string nom, string codePostal) { return BDD?.AjouterVille(nom, codePostal); }
+        public Menu_ AjouterMenu(string entree, string repas, string dessert, string boisson) { return BDD?.AjouterMenu(entree, repas, dessert, boisson); }
+        public Client AjouterClient(string nomprenom, string email, int nombrepersonne) { return BDD?.AjouterClient(nomprenom, email, nombrepersonne); }
+        public SouhaiteAvoir AjouterSouhaiteAvoir(Client client, Reservation reservation, Menu_ menu) { return BDD?.AjouterSouhaiteAvoir(client, reservation,menu); }
+        public Reservation AjouterReservation(int nombrepersonne, DateTime dateheure, bool manque, Table table, Client client) { return BDD?.AjouterReservation(nombrepersonne, dateheure,manque,table,client); }
+        public Table AjouterTable(int nombreplace, Zone zone) { return BDD?.AjouterTable(nombreplace,zone); }
+        public Zone AjouterZone(string description, bool fumeur) { return BDD?.AjouterZone(description, fumeur); }
 
-        public void SupprimerAuteur(Auteur auteur) { BDD?.SupprimerAuteur(auteur); }
-        public void SupprimerClient(clsClient client) { BDD?.SupprimerClient(client); }
-        public void SupprimerEcrire(Ecrire ecrire) { BDD?.SupprimerEcrire(ecrire); }
-        public void SupprimerEmprunt(Emprunt emprunt) { BDD?.SupprimerEmprunt(emprunt); }
-        public void SupprimerLivre(Livre livre) { BDD?.SupprimerLivre(livre); }
-        public void SupprimerVille(Ville ville) { BDD?.SupprimerVille(ville); }
+        public void SupprimerMenu(Menu_ menu) { BDD?.SupprimerMenu(menu); }
+        public void SupprimerClient(Client client) { BDD?.SupprimerClient(client); }
+        public void SupprimerSouhaiteAvoir(SouhaiteAvoir souhaiteavoir) { BDD?.SupprimerSouhaiteAvoir(souhaiteavoir); }
+        public void SupprimerReservation(Reservation reservation) { BDD?.SupprimerReservation(reservation); }
+        public void SupprimerTable(Table table) { BDD?.SupprimerTable(table); }
+        public void SupprimerZone(Zone zone) { BDD?.SupprimerZone(zone); }
         #endregion
 
         #region Méthodes effectuant des modifications/actions plus spécifiques sur les données

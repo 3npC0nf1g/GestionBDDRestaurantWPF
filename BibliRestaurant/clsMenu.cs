@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace BibliRestaurantBDD
-{ public class  Menu : INotifyPropertyChanged
+{ public class  Menu_ : INotifyPropertyChanged
     {
         public int ID { get; internal set; }
         public string Entree  { get; set; }

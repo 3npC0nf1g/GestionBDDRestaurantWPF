@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BibliRestaurantBDD
 {
-    internal class BDDBibliotheque : DbContext
+    internal class BDDRestaurant : DbContext
     {
         #region Tables de la BDD
-        internal DbSet<Menu> Menus { get; set; }
+        internal DbSet<Menu_> Menus { get; set; }
         internal DbSet<Client> Clients { get; set; }
         internal DbSet<Reservation> Reservations { get; set; }
         internal DbSet<SouhaiteAvoir> SouhaiteAvoir { get; set; }
@@ -41,23 +42,23 @@ namespace BibliRestaurantBDD
             #endregion
 
             #region Données présentes par défaut dans la BDD
-            modelBuilder.Entity<Menu>().HasData(
+            modelBuilder.Entity<Menu_>().HasData(
 
-                new Menu() { ID = 1,  Entree = "Salade de fruit",            Repas = "Ndolè",              Dessert = "Mousse aux fruits rouges",   Boisson = "Fanta" },
-                new Menu() { ID = 2,  Entree = "Velouté de petits pois",     Repas = "Poulet DG",          Dessert = "Carrot Cake",                Boisson = "Coca" },
-                new Menu() { ID = 3,  Entree = "Soupe de patates douces",    Repas = "Le poisson braisé",  Dessert = "Gâteau au thé matcha",       Boisson = "Sprite" },
-                new Menu() { ID = 4,  Entree = "Salade de fruit",            Repas = "Ndolè",              Dessert = "Gâteau au chocolat",         Boisson = "Anana" },
-                new Menu() { ID = 5,  Entree = "Tarte feuilletée pomme",     Repas = "Le poisson braisé",  Dessert = "Mousse aux fruits rouges",   Boisson = "Pemplemouss" },
-                new Menu() { ID = 6,  Entree = "Nems au four",               Repas = "Ndolè",              Dessert = "Gâteau au praliné",          Boisson = "Fanta" },
-                new Menu() { ID = 7,  Entree = "Croque-Monsieur au caramel", Repas = "Kondrè",             Dessert = "Gâteau au thé matcha",       Boisson = "Coca" },
-                new Menu() { ID = 8,  Entree = "Nems au four",               Repas = "Poulet DG",          Dessert = "Blondie au sorbet",          Boisson = "Sprite" },
-                new Menu() { ID = 9,  Entree = "Salade de fruit",            Repas = "Sanga",              Dessert = "Carrot Cake",                Boisson = "Pemplemouss" },
-                new Menu() { ID = 10, Entree = "Tarte feuilletée pomme",     Repas = "Le Nkui",            Dessert = "Gâteau au praliné",          Boisson = "Anana" },
-                new Menu() { ID = 11, Entree = "Nems au four",               Repas = "Ndolè",              Dessert = "Gâteau au chocolat",         Boisson = "Pemplemouss" },
-                new Menu() { ID = 12, Entree = "Velouté de petits pois",     Repas = "Kondrè",             Dessert = "Cheesecake",                 Boisson = "Anana" },
-                new Menu() { ID = 13, Entree = "Soupe de patates douces",    Repas = "Eru",                Dessert = "Mousse aux fruits rouges",   Boisson = "Fanta" },
-                new Menu() { ID = 14, Entree = "Salade de fruit",            Repas = "Koki",               Dessert = "Blondie au sorbet",          Boisson = "Coca" },
-                new Menu() { ID = 15, Entree = "Croque-Monsieur au caramel", Repas = "Okok",               Dessert = "Cheesecake",                 Boisson = "Sprite" } 
+                new Menu_() { ID = 1,  Entree = "Salade de fruit",            Repas = "Ndolè",              Dessert = "Mousse aux fruits rouges",   Boisson = "Fanta" },
+                new Menu_() { ID = 2,  Entree = "Velouté de petits pois",     Repas = "Poulet DG",          Dessert = "Carrot Cake",                Boisson = "Coca" },
+                new Menu_() { ID = 3,  Entree = "Soupe de patates douces",    Repas = "Le poisson braisé",  Dessert = "Gâteau au thé matcha",       Boisson = "Sprite" },
+                new Menu_() { ID = 4,  Entree = "Salade de fruit",            Repas = "Ndolè",              Dessert = "Gâteau au chocolat",         Boisson = "Anana" },
+                new Menu_() { ID = 5,  Entree = "Tarte feuilletée pomme",     Repas = "Le poisson braisé",  Dessert = "Mousse aux fruits rouges",   Boisson = "Pemplemouss" },
+                new Menu_() { ID = 6,  Entree = "Nems au four",               Repas = "Ndolè",              Dessert = "Gâteau au praliné",          Boisson = "Fanta" },
+                new Menu_() { ID = 7,  Entree = "Croque-Monsieur au caramel", Repas = "Kondrè",             Dessert = "Gâteau au thé matcha",       Boisson = "Coca" },
+                new Menu_() { ID = 8,  Entree = "Nems au four",               Repas = "Poulet DG",          Dessert = "Blondie au sorbet",          Boisson = "Sprite" },
+                new Menu_() { ID = 9,  Entree = "Salade de fruit",            Repas = "Sanga",              Dessert = "Carrot Cake",                Boisson = "Pemplemouss" },
+                new Menu_() { ID = 10, Entree = "Tarte feuilletée pomme",     Repas = "Le Nkui",            Dessert = "Gâteau au praliné",          Boisson = "Anana" },
+                new Menu_() { ID = 11, Entree = "Nems au four",               Repas = "Ndolè",              Dessert = "Gâteau au chocolat",         Boisson = "Pemplemouss" },
+                new Menu_() { ID = 12, Entree = "Velouté de petits pois",     Repas = "Kondrè",             Dessert = "Cheesecake",                 Boisson = "Anana" },
+                new Menu_() { ID = 13, Entree = "Soupe de patates douces",    Repas = "Eru",                Dessert = "Mousse aux fruits rouges",   Boisson = "Fanta" },
+                new Menu_() { ID = 14, Entree = "Salade de fruit",            Repas = "Koki",               Dessert = "Blondie au sorbet",          Boisson = "Coca" },
+                new Menu_() { ID = 15, Entree = "Croque-Monsieur au caramel", Repas = "Okok",               Dessert = "Cheesecake",                 Boisson = "Sprite" } 
             );
 
             modelBuilder.Entity<Client>().HasData(
@@ -157,147 +158,154 @@ namespace BibliRestaurantBDD
                 new Zone() { ID = 15, Description = "près de la sortie" , Fumeur = false, }
              
             );
-
-         
             #endregion
+
+
         }
         #endregion
 
         #region Méthodes permettant d'ajouter/d'enlever des données dans les tables de la BDD
-        internal Auteur AjouterAuteur(string nom, string prenom)
+        internal Menu_ AjouterMenu(string entree, string repas, string dessert, string boisson)
         {
             //Gestion des erreurs
-            if (nom == null || nom == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterAuteur)} : L'auteur doit avoir un nom (valeur NULL ou chaine vide)."); }
+            if (entree == null || entree == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterMenu)} : Le Menu doit avoir une entrée (valeur NULL ou chaine vide)."); }
+            if (repas == null || repas == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterMenu)} : Le Menu doit avoir une repas (valeur NULL ou chaine vide)."); }
+            if (dessert == null || dessert == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterMenu)} : Le Menu doit avoir une dessert (valeur NULL ou chaine vide)."); }
+            if (boisson == null || boisson == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterMenu)} : Le Menu doit avoir une boisson (valeur NULL ou chaine vide)."); }
 
-            //Ajout du nouvel auteur
-            Auteur lAuteur = new() { Nom = nom, Prenom = prenom };
-            Auteurs.Local.Add(lAuteur);
-            return lAuteur;
+            //Ajout d'un nouveau Menu 
+            Menu_ lMenu = new() { Entree = entree, Repas = repas, Dessert = dessert, Boisson = boisson };
+            Menus.Local.Add(lMenu);
+            return lMenu;
         }
-        internal Client AjouterClient(string nom, string prenom, Ville ville, string rueNumero)
+        internal Client AjouterClient(string nomprenom, string email, int nombrepersonne)
         {
+             int NombrePersonnesMIN = 1;
+             int NombrePersonnesMAX = 8;
+
             //Gestion des erreurs
-            if (nom == null || nom == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterClient)} : Le client doit avoir un nom (valeur NULL ou chaine vide)."); }
-            if (prenom == null || prenom == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterClient)} : Le client doit avoir un prénom (valeur NULL ou chaine vide)."); }
-            if (ville == null) { throw new ArgumentNullException($"{nameof(AjouterClient)} : Le client doit avoir une ville (valeur NULL)."); }
+            if (nomprenom == null || nomprenom == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterClient)} : Le client doit avoir un nom et un prenom (valeur NULL ou chaine vide)."); }
+            if(email == null || email == string.Empty) { throw new ArgumentNullException("L'email ne peut pas être une valeur vide !"); }
+            if(!email.Contains("@")) { throw new ArgumentException("L'email doit contenir au moins un @ !"); }
+            if (nombrepersonne < NombrePersonnesMIN || nombrepersonne > NombrePersonnesMAX) { throw new ArgumentException($"Le numéro de personne doit être compris entre {NombrePersonnesMIN} et {NombrePersonnesMAX}."); }
+
+
 
             //Ajout du nouveau client
-            Client lClient = new() { Nom = nom, Prenom = prenom, Ville = ville, RueNumero = rueNumero };
+            Client lClient = new() { NomPrenom = nomprenom, Email = email, NombrePersonne = nombrepersonne };
             Clients.Local.Add(lClient);
             return lClient;
         }
-        internal Ecrire AjouterEcrire(Auteur auteur, Livre livre)
+        internal Reservation AjouterReservation(int nombrepersonne, DateTime dateheure, bool manque, Table table, Client client)
+        {
+            int NombrePersonnesMIN = 1;
+            int NombrePersonnesMAX = 8;
+            DateTime DateReservationMAX = DateTime.Today.AddYears(1);
+
+
+            //Gestion des erreurs.
+            if (nombrepersonne < NombrePersonnesMIN || nombrepersonne > NombrePersonnesMAX) { throw new ArgumentException($"Le numéro de personne doit être compris entre {NombrePersonnesMIN} et {NombrePersonnesMAX}."); }
+            if (dateheure < DateTime.Today.AddDays(1)) throw new ArgumentException($"Pas de Reservations disponible avant demain.");
+            if (client == null) { throw new ArgumentNullException($"{nameof(AjouterReservation)} : La reservation doit avoir un client (valeur NULL)."); }
+            if (table == null) { throw new ArgumentNullException($"{nameof(AjouterReservation)} : La reservation  doit avoir une table (valeur NULL)."); }
+
+
+           
+            //Ajout d'une nouvelle réservation.
+            Reservation lReservation = new() { NombrePersonne = nombrepersonne , DateHeure = dateheure , Table = table , Client = client };
+            Reservations.Local.Add(lReservation);
+            return lReservation;
+        }
+        internal SouhaiteAvoir AjouterSouhaiteAvoir(Client client, Reservation reservation, Menu_ menu)
         {
             //Gestion des erreurs.
-            if (auteur == null) { throw new ArgumentNullException($"{nameof(AjouterEcrire)} : Il faut un auteur pour le lien livre/auteur (valeur NULL)."); }
-            if (livre == null) { throw new ArgumentNullException($"{nameof(AjouterEcrire)} : Il faut un livre pour le lien livre/auteur (valeur NULL)."); }
-            if (Ecrire.Local.FirstOrDefault(ecr => ecr.LivreID == livre.ID && ecr.AuteurID == auteur.ID) != null)
-            { throw new InvalidOperationException($"{nameof(AjouterEcrire)} : Le lien écrire existe déjà."); }
+            if (client == null) { throw new ArgumentNullException($"{nameof(AjouterSouhaiteAvoir)} : Il faut un client pour le lien client/reservation/menu (valeur NULL)."); }
+            if (reservation == null) { throw new ArgumentNullException($"{nameof(AjouterSouhaiteAvoir)} : Il faut un reservation pour le lien client/reservation/menu (valeur NULL)."); }
+            if (menu == null) { throw new ArgumentNullException($"{nameof(AjouterSouhaiteAvoir)} : Il faut un menu pour le lien client/reservation/menu (valeur NULL)."); }
+            if (SouhaiteAvoir.Local.FirstOrDefault(shtavr => shtavr.ClientID == client.ID && shtavr.ReservationID == reservation.ID && shtavr.MenuID == menu.ID) != null)
+            { throw new InvalidOperationException($"{nameof(AjouterSouhaiteAvoir)} : Le lien écrire existe déjà."); }
 
-            //Ajout du nouveau lien ecrire (livre/auteur).
-            Ecrire lEcrire = new() { Auteur = auteur, Livre = livre };
-            Ecrire.Local.Add(lEcrire);
-            return lEcrire;
+            //Ajout du nouveau lien souhaiteavoir (client/reservation/menu).
+            SouhaiteAvoir lSouhaiteAvoir = new() { Client = client , Reservation = reservation, Menu = menu};
+            SouhaiteAvoir.Local.Add(lSouhaiteAvoir);
+            return lSouhaiteAvoir;
         }
-        internal Emprunt AjouterEmprunt(DateTime dateEmprunt, Client client, Livre livre)
+        internal Table AjouterTable(int nombreplace, Zone zone)
+        {
+           int NombrePlaceMIN = 1;
+           int NombrePlaceMAX = 8;
+
+            //Gestion des erreurs
+            if (nombreplace < NombrePlaceMIN || nombreplace > NombrePlaceMAX) { throw new ArgumentException($"Le nombre de places doit être compris entre {NombrePlaceMIN} et {NombrePlaceMAX}."); }
+            if (zone == null) { throw new ArgumentNullException($"{nameof(AjouterTable)} : La table doit avoir une zone (valeur NULL)."); }
+
+            //Ajout d'une nouvelle table
+            Table lTable = new() { Zone = zone, NombrePlace = nombreplace };
+            Tables.Local.Add(lTable);
+            return lTable;
+        }
+        internal Zone AjouterZone(string description, bool fumeur)
         {
             //Gestion des erreurs
-            if (dateEmprunt == null) { throw new ArgumentNullException($"{nameof(AjouterEmprunt)} : L'emprunt doit avoir une date (valeur NULL)."); }
-            if (client == null) { throw new ArgumentNullException($"{nameof(AjouterEmprunt)} : L'emprunt doit avoir un client (valeur NULL)."); }
-            if (livre == null) { throw new ArgumentNullException($"{nameof(AjouterEmprunt)} : L'emprunt doit avoir un livre (valeur NULL)."); }
-            if (livre.Emprunts != null && livre.Emprunts.FirstOrDefault(em => em.DateRetour == null) != null)
-            { throw new InvalidOperationException($"{nameof(AjouterEmprunt)} : Il ne peut y avoir d'emprunt en cours pour le livre (un emprunt n'a pas de date de retour)."); }
+            if (description == null || description == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterZone)} : La Zone doit avoir une description (valeur NULL ou chaine vide)."); }
 
-            //Ajout du nouvel emprunt
-            Emprunt lEmprunt = new() { Client = client, Livre = livre, DateEmprunt = dateEmprunt };
-            Emprunts.Local.Add(lEmprunt);
-            return lEmprunt;
-        }
-        internal Livre AjouterLivre(string titre, DateTime dateAchat)
-        {
-            //Gestion des erreurs
-            if (titre == null || titre == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterLivre)} : Le livre doit avoir un titre (valeur NULL ou chaine vide)."); }
-            if (dateAchat == null) { throw new ArgumentNullException($"{nameof(AjouterLivre)} : Le livre doit avoir une date d'achat (valeur NULL)."); }
-
-            //Ajout du nouveau livre
-            Livre lLivre = new() { Titre = titre, DateAchat = dateAchat };
-            Livres.Local.Add(lLivre);
-            return lLivre;
-        }
-        internal Ville AjouterVille(string nom, string codePostal)
-        {
-            //Gestion des erreurs
-            if (nom == null || nom == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterVille)} : La ville doit avoir un nom (valeur NULL ou chaine vide)."); }
-            if (codePostal == null || codePostal == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterVille)} : La ville doit avoir un code postal (valeur NULL ou chaine vide)."); }
-
-            //Ajout de la nouvelle ville
-            Ville lVille = new() { Nom = nom, CodePostal = codePostal };
-            Villes.Local.Add(lVille);
-            return lVille;
+            //Ajout de la nouvelle Zone
+            Zone lZone = new() { Description = description, Fumeur = fumeur };
+            Zones.Local.Add(lZone);
+            return lZone;
         }
 
-        internal void SupprimerAuteur(Auteur auteur)
+        internal void SupprimerMenu(Menu_ menu)
         {
             //Gestion des erreurs
-            if (auteur == null) { throw new ArgumentNullException($"{nameof(SupprimerAuteur)} : Il faut un auteur en argument (valeur NULL)."); }
-            if ((auteur.Livres?.Count ?? 0) > 0) { throw new InvalidOperationException($"{nameof(SupprimerAuteur)} : Il faut d'abord supprimer les livres liés a l'auteur ou désassocier l'auteur de ceux-ci."); }
+            if (menu == null) { throw new ArgumentNullException($"{nameof(SupprimerMenu)} : Il faut un menu en argument (valeur NULL)."); }
 
-            //Suppression de l'auteur
-            Auteurs.Local.Remove(auteur);
+            //Suppression du menu
+            Menus.Local.Remove(menu);
         }
         internal void SupprimerClient(Client client)
         {
             //Gestion des erreurs
             if (client == null) { throw new ArgumentNullException($"{nameof(SupprimerClient)} : Il faut un client en argument (valeur NULL)."); }
 
-            //Avant de supprimer le client, suppression de tous les emprunts liés à celui-ci.
-            if (client.Emprunts != null)
-            {
-                foreach (Emprunt e in client.Emprunts) { SupprimerEmprunt(e); }
-            }
+            
 
             //Suppression du client
             Clients.Local.Remove(client);
         }
-        internal void SupprimerEcrire(Ecrire ecrire)
+        internal void SupprimerReservation(Reservation reservation)
         {
             //Gestion des erreurs
-            if (ecrire == null) { throw new ArgumentNullException($"{nameof(SupprimerEcrire)} : Il faut un lien ecrire(livre/auteur) en argument (valeur NULL)."); }
+            if (reservation == null) { throw new ArgumentNullException($"{nameof(SupprimerReservation)} : Il faut un lien ecrire(livre/auteur) en argument (valeur NULL)."); }
 
-            //Suppression du lien ecrire
-            Ecrire.Local.Remove(ecrire);
+            //Suppression de la reservation
+            Reservations.Local.Remove(reservation);
         }
-        internal void SupprimerEmprunt(Emprunt emprunt)
+        internal void SupprimerSouhaiteAvoir(SouhaiteAvoir souhaiteavoir)
         {
             //Gestion des erreurs
-            if (emprunt == null) { throw new ArgumentNullException($"{nameof(SupprimerEmprunt)} : Il faut un emprunt en argument (valeur NULL)."); }
+            if (souhaiteavoir == null) { throw new ArgumentNullException($"{nameof(SupprimerSouhaiteAvoir)} : Il faut un lien ecrire(livre/auteur) en argument (valeur NULL)."); }
 
             //Suppression de l'emprunt
-            Emprunts.Local.Remove(emprunt);
+            SouhaiteAvoir.Local.Remove(souhaiteavoir);
         }
-        internal void SupprimerLivre(Livre livre)
+        internal void SupprimerTable(Table table)
         {
             //Gestion des erreurs
-            if (livre == null) { throw new ArgumentNullException($"{nameof(SupprimerLivre)} : Il faut un livre en argument (valeur NULL)."); }
-            if ((livre.Emprunts?.Count ?? 0) > 0) { throw new InvalidOperationException($"{nameof(SupprimerLivre)} : Il faut d'abord terminer les emprunts liés au livre."); }
+            if (table == null) { throw new ArgumentNullException($"{nameof(SupprimerTable)} : Il faut un livre en argument (valeur NULL)."); }
 
-            //Suppression des liens ecrire du livre.
-            if (livre.Auteurs != null)
-            {
-                foreach (Ecrire e in livre.Auteurs) { SupprimerEcrire(e); }
-            }
+        
 
-            //Suppression du livre.
-            Livres.Local.Remove(livre);
+            //Suppression de la table.
+            Tables.Local.Remove(table);
         }
-        internal void SupprimerVille(Ville ville)
+        internal void SupprimerZone(Zone zone)
         {
             //Gestion des erreurs
-            if (ville == null) { throw new ArgumentNullException($"{nameof(SupprimerVille)} : Il faut une ville en argument (valeur NULL)."); }
-            if ((ville.Clients?.Count ?? 0) > 0) { throw new InvalidOperationException($"{nameof(SupprimerVille)} : Il faut d'abord supprimer les clients habitant la ville."); }
+            if (zone == null) { throw new ArgumentNullException($"{nameof(SupprimerZone)} : Il faut une ville en argument (valeur NULL)."); }
 
-            //Suppression de la ville.
-            Villes.Local.Remove(ville);
+            //Suppression de la zone.
+            Zones.Local.Remove(zone);
         }
         #endregion
     }

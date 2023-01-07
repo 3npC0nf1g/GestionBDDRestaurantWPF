@@ -1,28 +1,30 @@
-﻿<Window x:Class="WpfInterface.fenPrincipale"
+﻿<Window x:Class="BibliWPF.fenPrincipale"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfInterface"
+        xmlns:local="clr-namespace:BibliWPF"
         mc:Ignorable="d"
-        Title="Gestion d'une liste de réservations" Height="450" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Closing="OnClosing">
+        Title="Gestion de la liste de réservation d'un restaurant" Height="750" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Closing="OnClosing">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Menu>
-            <MenuItem Header="Fichier">
+        <Menu Name="mnuPrincipal">
+            <MenuItem Header="Application">
                 <MenuItem Header="Sauvegarder modifications"    Click="SauvegarderModifications"/>
-                <MenuItem Header="Charger une base de données"  Click="ChargerBaseDeDonnees"/>
                 <Separator />
                 <MenuItem Header="Quitter"                      Click="Quitter"/>
             </MenuItem>
-            <MenuItem Header="Vues">
-                <MenuItem Header="Deux volets"            Click="AfficherVueDeuxVolets"/>
-                <MenuItem Header="ListView"               Click="AfficherVueListView" />
-            </MenuItem>
+            <MenuItem Header="Affichage">
+                <MenuItem Header="Clients"            Click="AfficherClients"/>
+                <MenuItem Header="Menu"               Click="AfficherMenu" />
+                <MenuItem Header="Reservations"       Click="AfficherReservations" />
+                <MenuItem Header="Tables"             Click="AfficherTables" />
+                <MenuItem Header="Zones"              Click="AfficherZones" />
+                </MenuItem>
         </Menu>
         <Frame Name="Cadre" Grid.Row="1" Navigated="NavServiceOnNavigated" NavigationUIVisibility="Hidden" />
     </Grid>
