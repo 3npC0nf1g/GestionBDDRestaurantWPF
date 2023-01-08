@@ -52,7 +52,7 @@
                             </GridViewColumn>
 
                             <GridViewColumn>
-                                <GridViewColumnHeader Content="Date et Heure" Tag="Reservation.DateHeure" Click="OnClick"/>
+                                <GridViewColumnHeader Content="Reservation" Tag="Reservation.DateHeure" Click="OnClick"/>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Reservation.DateHeure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
