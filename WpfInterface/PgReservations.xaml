@@ -8,7 +8,133 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="pgReservations">
 
+
+    <Page.Resources>
+        <local:BoolConverter x:Key="objBoolConverter" />
+
+    </Page.Resources>
+
     <Grid>
-        
+ <GroupBox Name="grpReservations" Header="Liste des Reservations" Margin="2"  >
+            <Grid>
+                <ListView Name="lvReservations" ItemsSource="{Binding}" SelectionMode="Single"  Margin="1">
+                    <ListView.Resources>
+                        <ContextMenu x:Key="ctxOnItem">
+                            <MenuItem Header="Supprimer la Reservation sélectionnée" Click="SupprimerReservation"/>
+                            <MenuItem Header="Ajouter une Reservation" Click="AjouterReservation"/>
+                        </ContextMenu>
+                    </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="ContextMenu" Value="{StaticResource ctxOnItem}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Ajouter une Reservation" Click="AjouterReservation"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+
+                    <ListView.View>
+                              
+                        <GridView>
+
+
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Client" Tag="Client.NomPrenom" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Client.NomPrenom , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="125"
+                                                 
+                                                 />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+
+
+
+
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Table" Tag="Table.Zone.Description" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox SelectedItem="{Binding Table, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                  ItemsSource="{Binding Tables, RelativeSource={RelativeSource AncestorType={x:Type local:pgReservations}}}" DisplayMemberPath="Zone.Description" Width="200"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+
+
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Nombre Personne" Tag="NombrePersonne" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding NombrePersonne, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="125"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                        
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Date et Heure" Tag="DateHeure" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <DatePicker SelectedDate="{Binding DateHeure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Manque" Tag="Manque" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <DockPanel>
+                                            <RadioButton Content="Oui" IsChecked="{Binding Manque, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                            <RadioButton Content="Non" IsChecked="{Binding Manque, Mode=OneWay, Converter={StaticResource objBoolConverter}}" Width="50"/>
+                                        </DockPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </GroupBox>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </Grid>
 </Page>

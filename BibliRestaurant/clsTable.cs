@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BibliRestaurantBDD
 {
-    public class Table : INotifyPropertyChanged
+    public class Table_ : INotifyPropertyChanged
     {
         public int ID { get; internal set; }
         public int NombrePlace { get;  set; }

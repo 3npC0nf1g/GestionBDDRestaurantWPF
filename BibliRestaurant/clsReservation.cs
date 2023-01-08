@@ -18,7 +18,7 @@ namespace BibliRestaurantBDD
         /// <summary>
         /// Cardinalité de type [1:N], côté 1 : 1 Table par Reservation.
         /// </summary>
-        public Table Table { get; set; }
+        public Table_ Table { get; set; }
         public int TableID { get; internal set; } 
         
         

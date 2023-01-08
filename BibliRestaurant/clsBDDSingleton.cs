@@ -21,7 +21,7 @@ namespace BibliRestaurantBDD
         public ReadOnlyObservableCollection<Client> Clients { get; private set; }
         public ReadOnlyObservableCollection<Reservation> Reservations { get; private set; }
         public ReadOnlyObservableCollection<SouhaiteAvoir> SouhaiteAvoir { get; private set; }
-        public ReadOnlyObservableCollection<Table> Tables { get; private set; }
+        public ReadOnlyObservableCollection<Table_> Tables { get; private set; }
         public ReadOnlyObservableCollection<Zone> Zones { get; private set; }
         #endregion
 
@@ -39,7 +39,7 @@ namespace BibliRestaurantBDD
             BDD.SouhaiteAvoir.Load();
             SouhaiteAvoir = new ReadOnlyObservableCollection<SouhaiteAvoir>(BDD?.SouhaiteAvoir.Local.ToObservableCollection());
             BDD.Tables.Load();
-            Tables = new ReadOnlyObservableCollection<Table>(BDD?.Tables.Local.ToObservableCollection());
+            Tables = new ReadOnlyObservableCollection<Table_>(BDD?.Tables.Local.ToObservableCollection());
             BDD.Zones.Load();
             Zones = new ReadOnlyObservableCollection<Zone>(BDD?.Zones.Local.ToObservableCollection());
         }
@@ -49,15 +49,15 @@ namespace BibliRestaurantBDD
         public Menu_ AjouterMenu(string entree, string repas, string dessert, string boisson) { return BDD?.AjouterMenu(entree, repas, dessert, boisson); }
         public Client AjouterClient(string nomprenom, string email, int nombrepersonne) { return BDD?.AjouterClient(nomprenom, email, nombrepersonne); }
         public SouhaiteAvoir AjouterSouhaiteAvoir(Client client, Reservation reservation, Menu_ menu) { return BDD?.AjouterSouhaiteAvoir(client, reservation,menu); }
-        public Reservation AjouterReservation(int nombrepersonne, DateTime dateheure, bool manque, Table table, Client client) { return BDD?.AjouterReservation(nombrepersonne, dateheure,manque,table,client); }
-        public Table AjouterTable(int nombreplace, Zone zone) { return BDD?.AjouterTable(nombreplace,zone); }
+        public Reservation AjouterReservation(int nombrepersonne, DateTime dateheure, bool manque, Table_ table, Client client) { return BDD?.AjouterReservation(nombrepersonne, dateheure,manque,table,client); }
+        public Table_ AjouterTable(int nombreplace, Zone zone) { return BDD?.AjouterTable(nombreplace,zone); }
         public Zone AjouterZone(string description, bool fumeur) { return BDD?.AjouterZone(description, fumeur); }
 
         public void SupprimerMenu(Menu_ menu) { BDD?.SupprimerMenu(menu); }
         public void SupprimerClient(Client client) { BDD?.SupprimerClient(client); }
         public void SupprimerSouhaiteAvoir(SouhaiteAvoir souhaiteavoir) { BDD?.SupprimerSouhaiteAvoir(souhaiteavoir); }
         public void SupprimerReservation(Reservation reservation) { BDD?.SupprimerReservation(reservation); }
-        public void SupprimerTable(Table table) { BDD?.SupprimerTable(table); }
+        public void SupprimerTable(Table_ table) { BDD?.SupprimerTable(table); }
         public void SupprimerZone(Zone zone) { BDD?.SupprimerZone(zone); }
         #endregion
 

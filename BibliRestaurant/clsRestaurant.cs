@@ -15,7 +15,7 @@ namespace BibliRestaurantBDD
         internal DbSet<Client> Clients { get; set; }
         internal DbSet<Reservation> Reservations { get; set; }
         internal DbSet<SouhaiteAvoir> SouhaiteAvoir { get; set; }
-        internal DbSet<Table> Tables { get; set; }
+        internal DbSet<Table_> Tables { get; set; }
         internal DbSet<Zone> Zones { get; set; }
         #endregion
 
@@ -119,23 +119,23 @@ namespace BibliRestaurantBDD
                 new SouhaiteAvoir() { ClientID = 14, ReservationID = 1, MenuID = 7, },
                 new SouhaiteAvoir() { ClientID = 15, ReservationID = 1, MenuID = 7, }
              
-            ); modelBuilder.Entity<Table>().HasData(
+            ); modelBuilder.Entity<Table_>().HasData(
 
-                new Table() { ID = 1,  ZoneID = 1, NombrePlace = 7, },
-                new Table() { ID = 2,  ZoneID = 1, NombrePlace = 7, },
-                new Table() { ID = 3,  ZoneID = 1, NombrePlace = 7, },
-                new Table() { ID = 4,  ZoneID = 2, NombrePlace = 7, },
-                new Table() { ID = 5,  ZoneID = 2, NombrePlace = 7, },
-                new Table() { ID = 6,  ZoneID = 2, NombrePlace = 7, },
-                new Table() { ID = 7,  ZoneID = 1, NombrePlace = 7, },
-                new Table() { ID = 8,  ZoneID = 1, NombrePlace = 7, },
-                new Table() { ID = 9,  ZoneID = 1, NombrePlace = 7, },
-                new Table() { ID = 10, ZoneID = 2, NombrePlace = 7, },
-                new Table() { ID = 11, ZoneID = 2, NombrePlace = 7, },
-                new Table() { ID = 12, ZoneID = 2, NombrePlace = 7, },
-                new Table() { ID = 13, ZoneID = 1, NombrePlace = 7, },
-                new Table() { ID = 14, ZoneID = 1, NombrePlace = 7, },
-                new Table() { ID = 15, ZoneID = 1, NombrePlace = 9, }
+                new Table_() { ID = 1,  ZoneID = 1, NombrePlace = 7, },
+                new Table_() { ID = 2,  ZoneID = 1, NombrePlace = 7, },
+                new Table_() { ID = 3,  ZoneID = 1, NombrePlace = 7, },
+                new Table_() { ID = 4,  ZoneID = 2, NombrePlace = 7, },
+                new Table_() { ID = 5,  ZoneID = 2, NombrePlace = 7, },
+                new Table_() { ID = 6,  ZoneID = 2, NombrePlace = 7, },
+                new Table_() { ID = 7,  ZoneID = 1, NombrePlace = 7, },
+                new Table_() { ID = 8,  ZoneID = 1, NombrePlace = 7, },
+                new Table_() { ID = 9,  ZoneID = 1, NombrePlace = 7, },
+                new Table_() { ID = 10, ZoneID = 2, NombrePlace = 7, },
+                new Table_() { ID = 11, ZoneID = 2, NombrePlace = 7, },
+                new Table_() { ID = 12, ZoneID = 2, NombrePlace = 7, },
+                new Table_() { ID = 13, ZoneID = 1, NombrePlace = 7, },
+                new Table_() { ID = 14, ZoneID = 1, NombrePlace = 7, },
+                new Table_() { ID = 15, ZoneID = 1, NombrePlace = 9, }
              
             );
      
@@ -188,15 +188,14 @@ namespace BibliRestaurantBDD
             if(email == null || email == string.Empty) { throw new ArgumentNullException("L'email ne peut pas être une valeur vide !"); }
             if(!email.Contains("@")) { throw new ArgumentException("L'email doit contenir au moins un @ !"); }
             if (nombrepersonne < NombrePersonnesMIN || nombrepersonne > NombrePersonnesMAX) { throw new ArgumentException($"Le numéro de personne doit être compris entre {NombrePersonnesMIN} et {NombrePersonnesMAX}."); }
-
-
+          
 
             //Ajout du nouveau client
             Client lClient = new() { NomPrenom = nomprenom, Email = email, NombrePersonne = nombrepersonne };
             Clients.Local.Add(lClient);
             return lClient;
         }
-        internal Reservation AjouterReservation(int nombrepersonne, DateTime dateheure, bool manque, Table table, Client client)
+        internal Reservation AjouterReservation(int nombrepersonne, DateTime dateheure, bool manque, Table_ table, Client client)
         {
             int NombrePersonnesMIN = 1;
             int NombrePersonnesMAX = 8;
@@ -230,7 +229,7 @@ namespace BibliRestaurantBDD
             SouhaiteAvoir.Local.Add(lSouhaiteAvoir);
             return lSouhaiteAvoir;
         }
-        internal Table AjouterTable(int nombreplace, Zone zone)
+        internal Table_ AjouterTable(int nombreplace, Zone zone)
         {
            int NombrePlaceMIN = 1;
            int NombrePlaceMAX = 8;
@@ -240,7 +239,7 @@ namespace BibliRestaurantBDD
             if (zone == null) { throw new ArgumentNullException($"{nameof(AjouterTable)} : La table doit avoir une zone (valeur NULL)."); }
 
             //Ajout d'une nouvelle table
-            Table lTable = new() { Zone = zone, NombrePlace = nombreplace };
+            Table_ lTable = new() { Zone = zone, NombrePlace = nombreplace };
             Tables.Local.Add(lTable);
             return lTable;
         }
@@ -286,10 +285,10 @@ namespace BibliRestaurantBDD
             //Gestion des erreurs
             if (souhaiteavoir == null) { throw new ArgumentNullException($"{nameof(SupprimerSouhaiteAvoir)} : Il faut un lien ecrire(livre/auteur) en argument (valeur NULL)."); }
 
-            //Suppression de l'emprunt
+            //Suppression du SouhaiteAvoir
             SouhaiteAvoir.Local.Remove(souhaiteavoir);
         }
-        internal void SupprimerTable(Table table)
+        internal void SupprimerTable(Table_ table)
         {
             //Gestion des erreurs
             if (table == null) { throw new ArgumentNullException($"{nameof(SupprimerTable)} : Il faut un livre en argument (valeur NULL)."); }

@@ -24,7 +24,7 @@
                 <MenuItem Header="Reservations"       Click="AfficherReservations" />
                 <MenuItem Header="Tables"             Click="AfficherTables" />
                 <MenuItem Header="Zones"              Click="AfficherZones" />
-                </MenuItem>
+            </MenuItem>
         </Menu>
         <Frame Name="Cadre" Grid.Row="1" Navigated="NavServiceOnNavigated" NavigationUIVisibility="Hidden" />
     </Grid>

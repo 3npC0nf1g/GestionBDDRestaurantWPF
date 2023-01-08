@@ -7,8 +7,71 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="pgClients">
-
     <Grid>
-        
+        <GroupBox Name="grpListeClients" Header="Liste des différents Clients" Margin="2"  >
+            <Grid>
+                <ListView Name="lvClients" ItemsSource="{Binding}" SelectionMode="Single" Margin="1" >
+                    <ListView.Resources>
+                        <ContextMenu x:Key="ctxOnItem">
+                            <MenuItem Header="Supprimer le Client sélectionné" Click="SupprimerClient"/>
+                            <MenuItem Header="Ajouter un Client" Click="AjouterClient"/>
+                        </ContextMenu>
+                    </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="ContextMenu" Value="{StaticResource ctxOnItem}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Ajouter un Client" Click="AjouterClient"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+
+                    <ListView.View>
+                        <GridView>
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Nom et Prénom" Tag="NomPrenom" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding NomPrenom , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Nombre de personnes" Tag="NombrePersonne" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding NombrePersonne, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5" Width="200"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Email" Tag="Email" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5" Width="200"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+
+
+
+
+
+
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Page>
