@@ -23,7 +23,6 @@ namespace BibliWPF
     public partial class fenPrincipale : Window
     {
         private BDDSingleton BDD = BDDSingleton.Instance;
-
         public fenPrincipale()
         {
             InitializeComponent();
@@ -37,6 +36,7 @@ namespace BibliWPF
         private void AfficherReservations(object sender, RoutedEventArgs e) { Cadre.NavigationService.Navigate(new pgReservations()); }
         private void AfficherTables(object sender, RoutedEventArgs e) { Cadre.NavigationService.Navigate(new PgTables()); }
         private void AfficherZones(object sender, RoutedEventArgs e) { Cadre.NavigationService.Navigate(new pgZones()); }
+        private void AfficherSouhaiteAvoir(object sender, RoutedEventArgs e) { Cadre.NavigationService.Navigate(new pgSouhaiteAvoir()); }
         private void SauvegarderModifications(object sender, RoutedEventArgs e)
         {
             BDD.SauvegarderModifications();

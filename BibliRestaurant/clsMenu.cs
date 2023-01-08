@@ -12,7 +12,6 @@ namespace BibliRestaurantBDD
         public string Dessert  { get; set; }
         public string Boisson   { get; set; }
      
-        
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,6 @@ namespace BibliRestaurantBDD
         {
             optionsBuilder.UseSqlite($@"Data Source={Path.Combine(Directory.GetCurrentDirectory(), "BDDBibliotheque.db")}");
         }
-
         /// <summary>
         /// Méthode contenant le code lié aux contraintes du modèle de données et aux données présentes par défaut
         /// </summary>
@@ -38,125 +38,101 @@ namespace BibliRestaurantBDD
             #region Contraintes liées au modèle de la BDD
             //Pour une table provenant d'une association il vaut mieux préciser la clé primaire, qui est ici la combinaison des deux clés étrangères
             modelBuilder.Entity<SouhaiteAvoir>().HasKey(sc => new { sc.ClientID, sc.ReservationID, sc.MenuID });
-          
+
             #endregion
 
             #region Données présentes par défaut dans la BDD
             modelBuilder.Entity<Menu_>().HasData(
 
-                new Menu_() { ID = 1,  Entree = "Salade de fruit",            Repas = "Ndolè",              Dessert = "Mousse aux fruits rouges",   Boisson = "Fanta" },
-                new Menu_() { ID = 2,  Entree = "Velouté de petits pois",     Repas = "Poulet DG",          Dessert = "Carrot Cake",                Boisson = "Coca" },
-                new Menu_() { ID = 3,  Entree = "Soupe de patates douces",    Repas = "Le poisson braisé",  Dessert = "Gâteau au thé matcha",       Boisson = "Sprite" },
-                new Menu_() { ID = 4,  Entree = "Salade de fruit",            Repas = "Ndolè",              Dessert = "Gâteau au chocolat",         Boisson = "Anana" },
-                new Menu_() { ID = 5,  Entree = "Tarte feuilletée pomme",     Repas = "Le poisson braisé",  Dessert = "Mousse aux fruits rouges",   Boisson = "Pemplemouss" },
-                new Menu_() { ID = 6,  Entree = "Nems au four",               Repas = "Ndolè",              Dessert = "Gâteau au praliné",          Boisson = "Fanta" },
-                new Menu_() { ID = 7,  Entree = "Croque-Monsieur au caramel", Repas = "Kondrè",             Dessert = "Gâteau au thé matcha",       Boisson = "Coca" },
-                new Menu_() { ID = 8,  Entree = "Nems au four",               Repas = "Poulet DG",          Dessert = "Blondie au sorbet",          Boisson = "Sprite" },
-                new Menu_() { ID = 9,  Entree = "Salade de fruit",            Repas = "Sanga",              Dessert = "Carrot Cake",                Boisson = "Pemplemouss" },
-                new Menu_() { ID = 10, Entree = "Tarte feuilletée pomme",     Repas = "Le Nkui",            Dessert = "Gâteau au praliné",          Boisson = "Anana" },
-                new Menu_() { ID = 11, Entree = "Nems au four",               Repas = "Ndolè",              Dessert = "Gâteau au chocolat",         Boisson = "Pemplemouss" },
-                new Menu_() { ID = 12, Entree = "Velouté de petits pois",     Repas = "Kondrè",             Dessert = "Cheesecake",                 Boisson = "Anana" },
-                new Menu_() { ID = 13, Entree = "Soupe de patates douces",    Repas = "Eru",                Dessert = "Mousse aux fruits rouges",   Boisson = "Fanta" },
-                new Menu_() { ID = 14, Entree = "Salade de fruit",            Repas = "Koki",               Dessert = "Blondie au sorbet",          Boisson = "Coca" },
-                new Menu_() { ID = 15, Entree = "Croque-Monsieur au caramel", Repas = "Okok",               Dessert = "Cheesecake",                 Boisson = "Sprite" } 
+                new Menu_() { ID = 1,  Entree = "Salade de fruit",           Repas = "Ndolè",            Dessert = "Mousse aux fruits rouges",          Boisson = "Fanta"       },
+                new Menu_() { ID = 2,  Entree = "Velouté de petits pois",    Repas = "Poulet DG",        Dessert = "Carrot Cake",                       Boisson = "Coca"        },
+                new Menu_() { ID = 3,  Entree = "Soupe de patates douces",   Repas = "Le poisson braisé",Dessert = "Gâteau au thé matcha",              Boisson = "Sprite"      },
+                new Menu_() { ID = 4,  Entree = "Salade de fruit",           Repas = "Ndolè",            Dessert = "Gâteau au chocolat",                Boisson = "Anana"       },
+                new Menu_() { ID = 5,  Entree = "Tarte feuilletée pomme",    Repas = "Le poisson braisé",Dessert = "Mousse aux fruits rouges",          Boisson = "Pemplemouss" },
+                new Menu_() { ID = 6,  Entree = "Nems au four",              Repas = "Ndolè",            Dessert = "Gâteau au praliné",                 Boisson = "Fanta"       },
+                new Menu_() { ID = 7,  Entree = "Croque-Monsieur au caramel",Repas = "Kondrè",           Dessert = "Gâteau au thé matcha",              Boisson = "Coca"        },
+                new Menu_() { ID = 8,  Entree = "Tarte feuilletée pomme",    Repas = "Poulet DG",        Dessert = "Blondie au sorbet",                 Boisson = "Sprite"      },
+                new Menu_() { ID = 9,  Entree = "Salade de fruit",           Repas = "Sanga",            Dessert = "Carrot Cake",                       Boisson = "Pemplemouss" },
+                new Menu_() { ID = 10, Entree = "Tarte feuilletée pomme",    Repas = "Le Nkui",          Dessert = "Gâteau au praliné",                 Boisson = "Anana"       },
+                new Menu_() { ID = 11, Entree = "Nems au four",              Repas = "Ndolè",            Dessert = "Gâteau au chocolat",                Boisson = "Pemplemouss" },
+                new Menu_() { ID = 12, Entree = "Velouté de petits pois",    Repas = "Kondrè",           Dessert = "Cheesecake",                        Boisson = "Anana"       },
+                new Menu_() { ID = 13, Entree = "Soupe de patates douces",   Repas = "Eru",              Dessert = "Mousse aux fruits rouges",          Boisson = "Fanta"       },
+                new Menu_() { ID = 14, Entree = "Salade de fruit",           Repas = "Koki",             Dessert = "Blondie au sorbet",                 Boisson = "Coca"        },
+                new Menu_() { ID = 15, Entree = "Croque-Monsieur au caramel",Repas = "Okok",             Dessert = "Cheesecake",                        Boisson = "Sprite"      }
             );
 
             modelBuilder.Entity<Client>().HasData(
 
-               new Client() { ID = 1, NomPrenom = "Fontaine Jesper",       Email = "JesperFontaine@dayrep.com",          NombrePersonne = 4 },
-               new Client() { ID = 2,  NomPrenom = "Leroy Violette",       Email = "VioletteLeroy@fai.com",              NombrePersonne = 2 },
-               new Client() { ID = 3,  NomPrenom = "Favreau Fantine",      Email = "FantinaFavreau@fai.com",             NombrePersonne = 4 },
-               new Client() { ID = 4,  NomPrenom = "Flordelis Mathieu",    Email = "CarolosGabriaux@fai.com",            NombrePersonne = 7 },
-               new Client() { ID = 5,  NomPrenom = "Mavise  Michel",       Email = "PercyPanetier@rhyta.com",            NombrePersonne = 7 },
-               new Client() { ID = 6,  NomPrenom = "Marcoux Désiré",       Email = "MaximeScholten@jourrapide.com",      NombrePersonne = 2 },
-               new Client() { ID = 7,  NomPrenom = "Ayot Jacques",         Email = "DesireMarcoux@jourrapide.com",       NombrePersonne = 4 },
-               new Client() { ID = 8,  NomPrenom = "Pannetier Percy",      Email = "ChristabelBoncoeur@fai.com",         NombrePersonne = 7 },
-               new Client() { ID = 9,  NomPrenom = "Boncoeur Christabel",  Email = "CarolosGabriaux@fai.com",            NombrePersonne = 7 },
-               new Client() { ID = 10, NomPrenom = "Paré Natalie",         Email = "ChristabelBoncoeur@fai.com",         NombrePersonne = 6 },
-               new Client() { ID = 11, NomPrenom = "Carolos Gabriel",      Email = "PercyPanetier@rhyta.com",            NombrePersonne = 2 },
-               new Client() { ID = 12, NomPrenom = "Rep  Aniel",           Email = "CarolosGabriaux@fai.com",            NombrePersonne = 4 },
-               new Client() { ID = 13, NomPrenom = "Levijn Gianna",        Email = "DesireMarcoux@jourrapide.com",       NombrePersonne = 7 },
-               new Client() { ID = 14, NomPrenom = "Scholten Maxime",      Email = "MaximeScholten@jourrapide.com",      NombrePersonne = 7 },
-               new Client() { ID = 15, NomPrenom = "Favreau Julie",        Email = "MaximeScholten@jourrapide.com",      NombrePersonne = 7 }
-               
+               new Client() { ID = 1,  NomPrenom = "Fontaine Jesper",      Email = "JesperFontaine@dayrep.com",       NombrePersonne = 4, NumeroTelephone = "+32484674671" },
+               new Client() { ID = 2,  NomPrenom = "Leroy Violette",       Email = "VioletteLeroy@fai.com",           NombrePersonne = 2, NumeroTelephone = "+32493876947" },
+               new Client() { ID = 3,  NomPrenom = "Favreau Fantine",      Email = "FantinaFavreau@fai.com",          NombrePersonne = 4, NumeroTelephone = "+32493876947" },
+               new Client() { ID = 4,  NomPrenom = "Flordelis Mathieu",    Email = "CarolosGabriaux@fai.com",         NombrePersonne = 7, NumeroTelephone = "+32473961004" },
+               new Client() { ID = 5,  NomPrenom = "Mavise  Michel",       Email = "PercyPanetier@rhyta.com",         NombrePersonne = 7, NumeroTelephone = "+32493876947" },
+               new Client() { ID = 6,  NomPrenom = "Marcoux Désiré",       Email = "MaximeScholten@jourrapide.com",   NombrePersonne = 2, NumeroTelephone = "+32493876947" },
+               new Client() { ID = 7,  NomPrenom = "Ayot Jacques",         Email = "DesireMarcoux@jourrapide.com",    NombrePersonne = 4, NumeroTelephone = "+32493876947" },
+               new Client() { ID = 8,  NomPrenom = "Pannetier Percy",      Email = "ChristabelBoncoeur@fai.com",      NombrePersonne = 7, NumeroTelephone = "+32493876947" },
+               new Client() { ID = 9,  NomPrenom = "Boncoeur Christabel",  Email = "CarolosGabriaux@fai.com",         NombrePersonne = 7, NumeroTelephone = "+32473961004" },
+               new Client() { ID = 10, NomPrenom = "Paré Natalie",         Email = "ChristabelBoncoeur@fai.com",      NombrePersonne = 6, NumeroTelephone = "+32488796427" },
+               new Client() { ID = 11, NomPrenom = "Carolos Gabriel",      Email = "PercyPanetier@rhyta.com",         NombrePersonne = 2, NumeroTelephone = "+32484716662" },
+               new Client() { ID = 12, NomPrenom = "Rep  Aniel",           Email = "CarolosGabriaux@fai.com",         NombrePersonne = 4, NumeroTelephone = "+32493876947" },
+               new Client() { ID = 13, NomPrenom = "Levijn Gianna",        Email = "DesireMarcoux@jourrapide.com",    NombrePersonne = 7, NumeroTelephone = "+32473961004" },
+               new Client() { ID = 14, NomPrenom = "Scholten Maxime",      Email = "MaximeScholten@jourrapide.com",   NombrePersonne = 7, NumeroTelephone = "+32493876947" },
+               new Client() { ID = 15, NomPrenom = "Favreau Julie",        Email = "MaximeScholten@jourrapide.com",   NombrePersonne = 7, NumeroTelephone = "+32493876947" }
+
                );
 
 
             modelBuilder.Entity<Reservation>().HasData(
 
-              new Reservation() { ID = 1, Manque = true,  NombrePersonne = 6,  DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8},
-              new Reservation() { ID = 2, Manque = true,  NombrePersonne = 2 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 3, Manque = true,  NombrePersonne = 4 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 4, Manque = true,  NombrePersonne = 7 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 5, Manque = true,  NombrePersonne = 7 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 6, Manque = true,  NombrePersonne = 2 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 7, Manque = true,  NombrePersonne = 4 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 8, Manque = true,  NombrePersonne = 7 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 9, Manque = true,  NombrePersonne = 7 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 10,Manque = true,  NombrePersonne = 6 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 11,Manque = true,  NombrePersonne = 2 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 12,Manque = true,  NombrePersonne = 4 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 13,Manque = true,  NombrePersonne = 7 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 14,Manque = true,  NombrePersonne = 7 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}, 
-              new Reservation() { ID = 15,Manque = true,  NombrePersonne = 7 , DateHeure = DateTime.Today.AddDays(1), ClientID = 5, TableID =8}
+              new Reservation() { ID = 1,  Manque = true, NombrePersonne = 6, DateHeure = DateTime.Today.AddDays(1), ClientID = 15, TableID = 8 },
+              new Reservation() { ID = 2,  Manque = true, NombrePersonne = 2, DateHeure = DateTime.Today.AddDays(1), ClientID = 5,  TableID = 7 },
+              new Reservation() { ID = 3,  Manque = true, NombrePersonne = 4, DateHeure = DateTime.Today.AddDays(1), ClientID = 7,  TableID = 5 },
+              new Reservation() { ID = 4,  Manque = true, NombrePersonne = 7, DateHeure = DateTime.Today.AddDays(1), ClientID = 12, TableID = 6 },
+              new Reservation() { ID = 5,  Manque = true, NombrePersonne = 4, DateHeure = DateTime.Today.AddDays(1), ClientID = 14, TableID = 4 },
+              new Reservation() { ID = 6,  Manque = true, NombrePersonne = 2, DateHeure = DateTime.Today.AddDays(1), ClientID = 10, TableID = 3 },
+              new Reservation() { ID = 7,  Manque = true, NombrePersonne = 4, DateHeure = DateTime.Today.AddDays(1), ClientID = 11, TableID = 2 },
+              new Reservation() { ID = 8,  Manque = true, NombrePersonne = 5, DateHeure = DateTime.Today.AddDays(1), ClientID = 13, TableID = 4 },
+              new Reservation() { ID = 9,  Manque = true, NombrePersonne = 7, DateHeure = DateTime.Today.AddDays(1), ClientID = 7,  TableID = 2 },
+              new Reservation() { ID = 10, Manque = true, NombrePersonne = 6, DateHeure = DateTime.Today.AddDays(1), ClientID = 8,  TableID = 8 },
+              new Reservation() { ID = 11, Manque = true, NombrePersonne = 2, DateHeure = DateTime.Today.AddDays(1), ClientID = 6,  TableID = 6 },
+              new Reservation() { ID = 12, Manque = true, NombrePersonne = 4, DateHeure = DateTime.Today.AddDays(1), ClientID = 4,  TableID = 5 },
+              new Reservation() { ID = 13, Manque = true, NombrePersonne = 1, DateHeure = DateTime.Today.AddDays(1), ClientID = 9,  TableID = 1 },
+              new Reservation() { ID = 14, Manque = true, NombrePersonne = 7, DateHeure = DateTime.Today.AddDays(1), ClientID = 2,  TableID = 8 },
+              new Reservation() { ID = 15, Manque = true, NombrePersonne = 2, DateHeure = DateTime.Today.AddDays(1), ClientID = 1,  TableID = 1 }
                );
 
             modelBuilder.Entity<SouhaiteAvoir>().HasData(
 
-                new SouhaiteAvoir() { ClientID = 1,  ReservationID = 1, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 2,  ReservationID = 1, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 3,  ReservationID = 1, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 4,  ReservationID = 2, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 5,  ReservationID = 2, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 6,  ReservationID = 2, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 7,  ReservationID = 1, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 8,  ReservationID = 1, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 9,  ReservationID = 1, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 10, ReservationID = 2, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 11, ReservationID = 2, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 12, ReservationID = 2, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 13, ReservationID = 1, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 14, ReservationID = 1, MenuID = 7, },
-                new SouhaiteAvoir() { ClientID = 15, ReservationID = 1, MenuID = 7, }
+                new SouhaiteAvoir() { ClientID = 1, ReservationID = 1,  MenuID = 7, },
+                new SouhaiteAvoir() { ClientID = 2, ReservationID = 3,  MenuID = 1, },
+                new SouhaiteAvoir() { ClientID = 3, ReservationID = 13, MenuID = 5, },
+                new SouhaiteAvoir() { ClientID = 4, ReservationID = 7,  MenuID = 4, },
+                new SouhaiteAvoir() { ClientID = 5, ReservationID = 2,  MenuID = 3, },
+                new SouhaiteAvoir() { ClientID = 6, ReservationID = 15, MenuID = 9, },
+                new SouhaiteAvoir() { ClientID = 7, ReservationID = 9,  MenuID = 6, }
              
             ); modelBuilder.Entity<Table_>().HasData(
 
-                new Table_() { ID = 1,  ZoneID = 1, NombrePlace = 7, },
-                new Table_() { ID = 2,  ZoneID = 1, NombrePlace = 7, },
-                new Table_() { ID = 3,  ZoneID = 1, NombrePlace = 7, },
-                new Table_() { ID = 4,  ZoneID = 2, NombrePlace = 7, },
-                new Table_() { ID = 5,  ZoneID = 2, NombrePlace = 7, },
-                new Table_() { ID = 6,  ZoneID = 2, NombrePlace = 7, },
-                new Table_() { ID = 7,  ZoneID = 1, NombrePlace = 7, },
-                new Table_() { ID = 8,  ZoneID = 1, NombrePlace = 7, },
-                new Table_() { ID = 9,  ZoneID = 1, NombrePlace = 7, },
-                new Table_() { ID = 10, ZoneID = 2, NombrePlace = 7, },
-                new Table_() { ID = 11, ZoneID = 2, NombrePlace = 7, },
-                new Table_() { ID = 12, ZoneID = 2, NombrePlace = 7, },
-                new Table_() { ID = 13, ZoneID = 1, NombrePlace = 7, },
-                new Table_() { ID = 14, ZoneID = 1, NombrePlace = 7, },
-                new Table_() { ID = 15, ZoneID = 1, NombrePlace = 9, }
-             
+                new Table_() { ID = 1, ZoneID = 1, NombrePlace = 7, },
+                new Table_() { ID = 2, ZoneID = 2, NombrePlace = 5, },
+                new Table_() { ID = 3, ZoneID = 7, NombrePlace = 3, },
+                new Table_() { ID = 4, ZoneID = 2, NombrePlace = 2, },
+                new Table_() { ID = 5, ZoneID = 8, NombrePlace = 1, },
+                new Table_() { ID = 6, ZoneID = 3, NombrePlace = 7, },
+                new Table_() { ID = 7, ZoneID = 5, NombrePlace = 6, },
+                new Table_() { ID = 8, ZoneID = 4, NombrePlace = 1, }
             );
-     
+
             modelBuilder.Entity<Zone>().HasData(
 
-                new Zone() { ID = 1,  Description = "Térasse" ,           Fumeur = false, },
-                new Zone() { ID = 2,  Description = "Près du bar" ,       Fumeur = false, },
-                new Zone() { ID = 3,  Description = "près de la sortie" , Fumeur = false, },
-                new Zone() { ID = 4,  Description = "Mezzanine" ,         Fumeur = false, },
-                new Zone() { ID = 5,  Description = "Entreé" ,            Fumeur = false, },
-                new Zone() { ID = 6,  Description = "Mezzanine" ,         Fumeur = false, },
-                new Zone() { ID = 7,  Description = "Térasse" ,           Fumeur = false, },
-                new Zone() { ID = 8,  Description = "Près du bar" ,       Fumeur = false, },
-                new Zone() { ID = 9,  Description = "près de la sortie" , Fumeur = false, },
-                new Zone() { ID = 10, Description = "Entreé" ,            Fumeur = false, },
-                new Zone() { ID = 11, Description = "Mezzanine" ,         Fumeur = false, },
-                new Zone() { ID = 12, Description = "Entreé" ,            Fumeur = false, },
-                new Zone() { ID = 13, Description = "Térasse" ,           Fumeur = false, },
-                new Zone() { ID = 14, Description = "Près du bar" ,       Fumeur = false, },
-                new Zone() { ID = 15, Description = "près de la sortie" , Fumeur = false, }
-             
+                new Zone() { ID = 1, Description = "Térasse",             Fumeur = true,  },
+                new Zone() { ID = 2, Description = "Près du bar",         Fumeur = false, },
+                new Zone() { ID = 3, Description = "près de la sortie",   Fumeur = true,  },
+                new Zone() { ID = 4, Description = "Mezzanine",           Fumeur = false, },
+                new Zone() { ID = 5, Description = "Entreé",              Fumeur = false, },
+                new Zone() { ID = 6, Description = "près des toilettes",  Fumeur = false, },
+                new Zone() { ID = 7, Description = "Balcon",              Fumeur = true,  },
+                new Zone() { ID = 8, Description = "Sortie",              Fumeur = false, }
             );
             #endregion
 
@@ -178,20 +154,23 @@ namespace BibliRestaurantBDD
             Menus.Local.Add(lMenu);
             return lMenu;
         }
-        internal Client AjouterClient(string nomprenom, string email, int nombrepersonne)
+        internal Client AjouterClient(string nomprenom, string email, int nombrepersonne, string numerotelephone)
         {
-             int NombrePersonnesMIN = 1;
-             int NombrePersonnesMAX = 8;
+            int NombrePersonnesMIN = 1;
+            int NombrePersonnesMAX = 8;
 
             //Gestion des erreurs
             if (nomprenom == null || nomprenom == string.Empty) { throw new ArgumentNullException($"{nameof(AjouterClient)} : Le client doit avoir un nom et un prenom (valeur NULL ou chaine vide)."); }
-            if(email == null || email == string.Empty) { throw new ArgumentNullException("L'email ne peut pas être une valeur vide !"); }
-            if(!email.Contains("@")) { throw new ArgumentException("L'email doit contenir au moins un @ !"); }
+            if (email == null || email == string.Empty) { throw new ArgumentNullException("L'email ne peut pas être une valeur vide !"); }
+            if (!email.Contains("@")) { throw new ArgumentException("L'email doit contenir au moins un @ !"); }
             if (nombrepersonne < NombrePersonnesMIN || nombrepersonne > NombrePersonnesMAX) { throw new ArgumentException($"Le numéro de personne doit être compris entre {NombrePersonnesMIN} et {NombrePersonnesMAX}."); }
-          
+            if (numerotelephone == null || numerotelephone == string.Empty) { throw new ArgumentNullException("Le numéro de téléphone ne peut pas être une valeur vide !"); }
+            if (numerotelephone.Length < 11) { throw new ArgumentException($"Le numéro de téléphone doit être de longueur 11 minimum !"); }
+            if (numerotelephone.IndexOf("0032") != 0 && numerotelephone.IndexOf("+32") != 0) { throw new ArgumentException("Le numéro de téléphone doit commencer par 0032 ou +32 !"); }
+
 
             //Ajout du nouveau client
-            Client lClient = new() { NomPrenom = nomprenom, Email = email, NombrePersonne = nombrepersonne };
+            Client lClient = new() { NomPrenom = nomprenom, Email = email, NombrePersonne = nombrepersonne, NumeroTelephone = numerotelephone };
             Clients.Local.Add(lClient);
             return lClient;
         }
@@ -208,10 +187,8 @@ namespace BibliRestaurantBDD
             if (client == null) { throw new ArgumentNullException($"{nameof(AjouterReservation)} : La reservation doit avoir un client (valeur NULL)."); }
             if (table == null) { throw new ArgumentNullException($"{nameof(AjouterReservation)} : La reservation  doit avoir une table (valeur NULL)."); }
 
-
-           
             //Ajout d'une nouvelle réservation.
-            Reservation lReservation = new() { NombrePersonne = nombrepersonne , DateHeure = dateheure , Table = table , Client = client };
+            Reservation lReservation = new() { NombrePersonne = nombrepersonne, DateHeure = dateheure, Table = table, Client = client };
             Reservations.Local.Add(lReservation);
             return lReservation;
         }
@@ -225,21 +202,21 @@ namespace BibliRestaurantBDD
             { throw new InvalidOperationException($"{nameof(AjouterSouhaiteAvoir)} : Le lien écrire existe déjà."); }
 
             //Ajout du nouveau lien souhaiteavoir (client/reservation/menu).
-            SouhaiteAvoir lSouhaiteAvoir = new() { Client = client , Reservation = reservation, Menu = menu};
+            SouhaiteAvoir lSouhaiteAvoir = new() { Client = client, Reservation = reservation, Menu = menu };
             SouhaiteAvoir.Local.Add(lSouhaiteAvoir);
             return lSouhaiteAvoir;
         }
         internal Table_ AjouterTable(int nombreplace, Zone zone)
         {
-           int NombrePlaceMIN = 1;
-           int NombrePlaceMAX = 8;
+            int NombrePlaceMIN = 1;
+            int NombrePlaceMAX = 8;
 
             //Gestion des erreurs
             if (nombreplace < NombrePlaceMIN || nombreplace > NombrePlaceMAX) { throw new ArgumentException($"Le nombre de places doit être compris entre {NombrePlaceMIN} et {NombrePlaceMAX}."); }
             if (zone == null) { throw new ArgumentNullException($"{nameof(AjouterTable)} : La table doit avoir une zone (valeur NULL)."); }
 
             //Ajout d'une nouvelle table
-            Table_ lTable = new() { Zone = zone, NombrePlace = nombreplace };
+            Table_ lTable = new() {  NombrePlace = nombreplace, Zone = zone };
             Tables.Local.Add(lTable);
             return lTable;
         }
@@ -267,7 +244,7 @@ namespace BibliRestaurantBDD
             //Gestion des erreurs
             if (client == null) { throw new ArgumentNullException($"{nameof(SupprimerClient)} : Il faut un client en argument (valeur NULL)."); }
 
-            
+
 
             //Suppression du client
             Clients.Local.Remove(client);
@@ -293,7 +270,6 @@ namespace BibliRestaurantBDD
             //Gestion des erreurs
             if (table == null) { throw new ArgumentNullException($"{nameof(SupprimerTable)} : Il faut un livre en argument (valeur NULL)."); }
 
-        
 
             //Suppression de la table.
             Tables.Local.Remove(table);

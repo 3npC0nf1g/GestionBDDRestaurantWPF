@@ -28,15 +28,14 @@
                             <MenuItem Header="Ajouter un Client" Click="AjouterClient"/>
                         </ContextMenu>
                     </ListView.ContextMenu>
-
+                    
                     <ListView.View>
                         <GridView>
-
                             <GridViewColumn>
                                 <GridViewColumnHeader Content="Nom et Prénom" Tag="NomPrenom" Click="OnClick"/>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding NomPrenom , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                                        <TextBox Text="{Binding NomPrenom , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -45,11 +44,19 @@
                                 <GridViewColumnHeader Content="Nombre de personnes" Tag="NombrePersonne" Click="OnClick"/>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding NombrePersonne, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5" Width="200"/>
+                                        <TextBox Text="{Binding NombrePersonne, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5" Width="125"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Numéro de téléphone" Tag="NumeroTelephone" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding NumeroTelephone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
                             <GridViewColumn>
                                 <GridViewColumnHeader Content="Email" Tag="Email" Click="OnClick"/>
@@ -59,14 +66,6 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
-
-
-
-
-
-
-
 
                         </GridView>
                     </ListView.View>

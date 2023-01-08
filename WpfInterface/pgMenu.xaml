@@ -7,8 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="pgMenu">
-
-
     <Grid>
         <GroupBox Name="grpListeMenus" Header="Liste des différents Menus" Margin="2"  >
             <Grid>
@@ -30,10 +28,9 @@
                             <MenuItem Header="Ajouter un Menu" Click="AjouterMenu"/>
                         </ContextMenu>
                     </ListView.ContextMenu>
-
+                    
                     <ListView.View>
                         <GridView>
-                            
                             <GridViewColumn>
                                 <GridViewColumnHeader Content="Entrée" Tag="Entree" Click="OnClick"/>
                                 <GridViewColumn.CellTemplate>
@@ -47,11 +44,10 @@
                                 <GridViewColumnHeader Content="Repas" Tag="Repas" Click="OnClick"/>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Repas, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5" Width="200"/>
+                                        <TextBox Text="{Binding Repas, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5" Width="150"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
 
                             <GridViewColumn>
                                 <GridViewColumnHeader Content="Dessert" Tag="Dessert" Click="OnClick"/>
@@ -66,18 +62,10 @@
                                 <GridViewColumnHeader Content="Boisson" Tag="Boisson" Click="OnClick"/>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Boisson, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5" Width="200"/>
+                                        <TextBox Text="{Binding Boisson, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="5" Width="150"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
-
-
-
-
-
-
-
 
                         </GridView>
                     </ListView.View>

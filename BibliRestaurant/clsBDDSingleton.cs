@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.ObjectModel;
 
@@ -47,12 +48,11 @@ namespace BibliRestaurantBDD
 
         #region Méthodes permettant d'ajouter/d'enlever des données dans les tables de la BDD
         public Menu_ AjouterMenu(string entree, string repas, string dessert, string boisson) { return BDD?.AjouterMenu(entree, repas, dessert, boisson); }
-        public Client AjouterClient(string nomprenom, string email, int nombrepersonne) { return BDD?.AjouterClient(nomprenom, email, nombrepersonne); }
-        public SouhaiteAvoir AjouterSouhaiteAvoir(Client client, Reservation reservation, Menu_ menu) { return BDD?.AjouterSouhaiteAvoir(client, reservation,menu); }
-        public Reservation AjouterReservation(int nombrepersonne, DateTime dateheure, bool manque, Table_ table, Client client) { return BDD?.AjouterReservation(nombrepersonne, dateheure,manque,table,client); }
-        public Table_ AjouterTable(int nombreplace, Zone zone) { return BDD?.AjouterTable(nombreplace,zone); }
+        public Client AjouterClient(string nomprenom, string email, int nombrepersonne, string numerotelephone) { return BDD?.AjouterClient(nomprenom, email, nombrepersonne, numerotelephone); }
+        public SouhaiteAvoir AjouterSouhaiteAvoir(Client client, Reservation reservation, Menu_ menu) { return BDD?.AjouterSouhaiteAvoir(client, reservation, menu); }
+        public Reservation AjouterReservation(int nombrepersonne, DateTime dateheure, bool manque, Table_ table, Client client) { return BDD?.AjouterReservation(nombrepersonne, dateheure, manque, table, client); }
+        public Table_ AjouterTable(int nombreplace, Zone zone) { return BDD?.AjouterTable(nombreplace, zone); }
         public Zone AjouterZone(string description, bool fumeur) { return BDD?.AjouterZone(description, fumeur); }
-
         public void SupprimerMenu(Menu_ menu) { BDD?.SupprimerMenu(menu); }
         public void SupprimerClient(Client client) { BDD?.SupprimerClient(client); }
         public void SupprimerSouhaiteAvoir(SouhaiteAvoir souhaiteavoir) { BDD?.SupprimerSouhaiteAvoir(souhaiteavoir); }

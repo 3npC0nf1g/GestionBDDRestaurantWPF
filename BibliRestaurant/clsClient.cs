@@ -13,10 +13,11 @@ namespace BibliRestaurantBDD
 
         public string NomPrenom { get; set; }
 
-    
+        public string NumeroTelephone { get; set; }
+
         public string Email { get; set; }
 
-        public int NombrePersonne { get; set; } 
+        public int NombrePersonne { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

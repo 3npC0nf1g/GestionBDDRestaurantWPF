@@ -8,7 +8,61 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="pgZones">
 
+    <Page.Resources>
+        <local:BoolConverter x:Key="objBoolConverter" />
+    </Page.Resources>
+
     <Grid>
         
+        <GroupBox Name="grpListeZones" Header="Liste des différentes Zones" Margin="2"  >
+            <Grid>
+                <ListView Name="lvZones" ItemsSource="{Binding}" SelectionMode="Single" Margin="1" >
+                    <ListView.Resources>
+                        <ContextMenu x:Key="ctxOnItem">
+                            <MenuItem Header="Supprimer la Zone sélectionnée" Click="SupprimerZone"/>
+                            <MenuItem Header="Ajouter une Zone" Click="AjouterZone"/>
+                        </ContextMenu>
+                    </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="ContextMenu" Value="{StaticResource ctxOnItem}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Ajouter une Zone" Click="AjouterZone"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+
+                    <ListView.View>
+                        <GridView>
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Description" Tag="Description" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Fumeur" Tag="Fumeur" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <DockPanel>
+                                            <RadioButton Content="Oui" IsChecked="{Binding Fumeur, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                            <RadioButton Content="Non" IsChecked="{Binding Fumeur, Mode=OneWay, Converter={StaticResource objBoolConverter}}" Width="50"/>
+                                        </DockPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Page>

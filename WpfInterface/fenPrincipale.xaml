@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BibliWPF"
+         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Gestion de la liste de réservation d'un restaurant" Height="750" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Closing="OnClosing">
+        Title="Gestion de la liste de réservation d'un restaurant" Height="550" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Closing="OnClosing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -24,6 +25,7 @@
                 <MenuItem Header="Reservations"       Click="AfficherReservations" />
                 <MenuItem Header="Tables"             Click="AfficherTables" />
                 <MenuItem Header="Zones"              Click="AfficherZones" />
+                <MenuItem Header="SouhaiteAvoir"      Click="AfficherSouhaiteAvoir" />
             </MenuItem>
         </Menu>
         <Frame Name="Cadre" Grid.Row="1" Navigated="NavServiceOnNavigated" NavigationUIVisibility="Hidden" />

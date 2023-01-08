@@ -9,6 +9,52 @@
       Title="PgTables">
 
     <Grid>
-        
+        <GroupBox Name="grpTables" Header="Liste des Tables" Margin="2"  >
+            <Grid>
+                <ListView Name="lvTables" ItemsSource="{Binding}" SelectionMode="Single"  Margin="1">
+                    <ListView.Resources>
+                        <ContextMenu x:Key="ctxOnItem">
+                            <MenuItem Header="Supprimer la Table sélectionnée" Click="SupprimerTable"/>
+                            <MenuItem Header="Ajouter une Table" Click="AjouterTable"/>
+                        </ContextMenu>
+                    </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="ContextMenu" Value="{StaticResource ctxOnItem}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Ajouter une Table" Click="AjouterTable"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListView.View>
+
+                        <GridView>
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Nombre de Places" Tag="NombrePlace" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding NombrePlace , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="125"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Zone" Tag="Zone.Description" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox SelectedItem="{Binding Zone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                  ItemsSource="{Binding Zones, RelativeSource={RelativeSource AncestorType={x:Type local:PgTables}}}" DisplayMemberPath="Description" Width="150"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Page>
+

@@ -21,16 +21,11 @@ namespace BibliRestaurantBDD
         public Table_ Table { get; set; }
         public int TableID { get; internal set; } 
         
-        
         /// <summary>
         /// Cardinalité de type [1:N], côté 1 : 1 Client par Reservation.
         /// </summary>
         public Client Client { get; set; }
         public int ClientID { get; internal set; }
-
-
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

@@ -34,7 +34,7 @@ namespace BibliWPF
 
         private void AjouterClient(object sender, RoutedEventArgs e)
         {
-            Statics.TryCatch(() => { lvClients.SelectedItem = _bdd.AjouterClient("Teuma Steve", "teumayouomo115@gmail.com", 8); }, nameof(AjouterClient));
+            Statics.TryCatch(() => { lvClients.SelectedItem = _bdd.AjouterClient("Teuma Steve", "teumayouomo115@gmail.com", 8, "+32484674671"); }, nameof(AjouterClient));
         }
 
         private void SupprimerClient(object sender, RoutedEventArgs e)

@@ -53,7 +53,6 @@ namespace BibliWPF
             }
         }
 
-       
         #region Mécanisme de tri des données dans le listview
         GridViewColumnHeader _sortColumnHeader = null;
         ListSortDirection _sortDirection = ListSortDirection.Ascending;

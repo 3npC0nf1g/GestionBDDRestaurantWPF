@@ -3,12 +3,102 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       xmlns:local="clr-namespace:BibliWPF"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="pgSouhaiteAvoir">
 
     <Grid>
-        
+        <GroupBox Name="grpSouhaiteAvoir" Header="Liste des liens SouhaiteAvoir" Margin="2"  >
+            <Grid>
+                <ListView Name="lvSouhaiteAvoir" ItemsSource="{Binding}" SelectionMode="Single"  Margin="1">
+                    <ListView.Resources>
+                        <ContextMenu x:Key="ctxOnItem">
+                            <MenuItem Header="Supprimer le lien SouhaiteAvoir sélectionné" Click="SupprimerSouhaiteAvoir"/>
+                            <MenuItem Header="Ajouter un lien SouhaiteAvoir" Click="AjouterSouhaiteAvoirAfficherInbox"/>
+                        </ContextMenu>
+                    </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="ContextMenu" Value="{StaticResource ctxOnItem}"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Ajouter un lien SouhaiteAvoir" Click="AjouterSouhaiteAvoirAfficherInbox"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListView.View>
+
+                        <GridView>
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Client" Tag="Client.NomPrenom" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Client.NomPrenom , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="125"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Menu" Tag="Menu.Repas" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Menu.Repas, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="200"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumnHeader Content="Date et Heure" Tag="Reservation.DateHeure" Click="OnClick"/>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Reservation.DateHeure, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </GroupBox>
+
+        <!-- Important de laisser à la fin du code XAML pour que cela reste au dessus du reste de la fenêtre! -->
+        <Grid x:Name="inboxAjouterSouhaiteAvoir" Visibility="Collapsed" Grid.RowSpan="4" Grid.ColumnSpan="4">
+            <Grid Background="Black" Opacity="0.5"/>
+            <Border MinWidth="250" MinHeight="60" Background="LightGray" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="170"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock  Grid.ColumnSpan="4" Background="Blue" Margin="2" />
+                    <TextBlock  Text="Ajouter un lien SouhaiteAvoir" TextAlignment="Center" VerticalAlignment="Center"
+                                Grid.ColumnSpan="4" Foreground="White" Margin="2" />
+                    <TextBlock  Grid.Row="1" Text="Client :" Margin="5,2,2,2" />
+                    <ComboBox   Name="IAE_cmbClient" ItemsSource="{Binding Clients, RelativeSource={RelativeSource AncestorType={x:Type local:pgSouhaiteAvoir}}}" DisplayMemberPath="NomPrenom"
+                                Grid.Row="1" Grid.Column="1" Margin="2" />
+                    <TextBlock  Grid.Row="2" Text="Menu :" Margin="5,2,2,2" />
+                    <ComboBox   Name="IAE_cmbMenu" ItemsSource="{Binding Menus, RelativeSource={RelativeSource AncestorType={x:Type local:pgSouhaiteAvoir}}}" DisplayMemberPath="Repas"
+                                Grid.Row="2" Grid.Column="1" Margin="2" />
+                    <TextBlock  Grid.Row="3" Text="Reservation :" Margin="5,2,2,2" />
+                    <ComboBox   Name="IAE_cmbReservation" ItemsSource="{Binding Reservations, RelativeSource={RelativeSource AncestorType={x:Type local:pgSouhaiteAvoir}}}" DisplayMemberPath="DateHeure"
+                                Grid.Row="3" Grid.Column="1" Margin="2" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" Grid.ColumnSpan="2">
+                        <Button Margin="2" Content=" OK "      Background="{x:Null}" Click="AjouterSouhaiteAvoirConfirmerAction"/>
+                        <Button Margin="2" Content=" Annuler " Background="{x:Null}" Click="AjouterSouhaiteAvoirAnnulerAction"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </Page>
